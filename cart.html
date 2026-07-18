@@ -1,0 +1,53 @@
+{%include 'user_header.html'%}
+{% load mathfilters %}
+
+<html>
+<head>
+<style>
+table {
+	font-family: times new roman;
+	border-collapse: collapse;
+	width: 100%;
+}
+td, th{
+	border: 1px solid #dddddd;
+	text-align: center;
+	padding: 8px;
+	}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1 style="padding-top: 20px;"><center><i>View Cart</i></center></h1>
+</div>
+<table class="table table-bordered">
+	<tr>
+		<th>s.no</th>
+		<th>Product Name</th>
+		<th>Category Name</th>
+		<th>Price</th>
+		<th>Total Amount</th>
+	</tr>
+{% for i in product_details %}
+	<tr>
+		<td>{{forloop.counter}}</td>
+		<td>{{i.product_id.p_name}}</td>
+		<td>{{i.product_id.category.name}}</td>
+		<td>{{i.product_id.p_price}}</td>
+		
+		<td>{% with a=i.book_id.tot_member %}
+		{% with b=i.product_id.p_price %}
+		
+	     {{ a|mul:b }}
+	    {% endwith %}
+	    {% endwith %}</td>
+	</tr>
+{% empty %}
+	<tr>
+		<td>no data</td>
+	</tr>
+	{% endfor %}
+</table>
+</body>
+</html>
+{%include 'footer.html'%}

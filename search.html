@@ -1,0 +1,44 @@
+{%include 'temheader.html'%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+
+    <section class="ftco-section">
+      <div class="container" style="background: #FFF;padding: 30px;">
+        <center><form method="post" style=" margin:30px;">{% csrf_token %}
+          <div class="row">
+            <div class="col-md-8"><input type="text" name="search" class="form-control" placeholder="Search Based on City or Area..."></div>
+            <div class="col-md-3"><input type="submit"  class="btn btn-info" value="Search Market" style="padding-top:15px; padding-bottom: 15px;"></div>
+          </div>
+        </form></center>
+        <div class="row no-gutters justify-content-center ">
+          <div class="col-md-7 text-center heading-section " style="padding-top: 30px;">
+            <h2></h2>
+          </div>
+        </div>
+        <div class="row">
+            {% for i in ids %}
+                <div class="col-md-4" style="text-align: center;">
+                   <h2 style="color: green;">{{i.name}}</h2>
+                  <img src="/media/{{i.image}}" style="width: 100%;">
+                  
+                </div>
+                <div class="col-md-7">
+                	<h3 style="padding-top: 40px;">Water Level</h3>
+                	<p>{{i.water_contain}}</p>
+                </div>
+                <div style="clear: both;"></div>
+                <h3 style="padding-top: 20px;font-size: 20px;">Fertilizer's Used</h3>
+                <p>{{i.fertilizer}}</p>
+                 <h3 style="padding-top: 20px;font-size: 20px;">Nature of Soil Details</h3>
+                <p>{{i.soil}}</p>
+                <h3 style="padding-top: 20px;font-size: 20px;">Other Details</h3><br>
+                <p>{{i.others}}</p>
+                {% empty %}
+                 <div><h2 style="text-align:center;">No Products Found.....</h2></div>
+                <br><br><br><br><br><br>
+            {% endfor %}
+
+        </div>
+		    </div>
+      </section>
+{%include 'temfooter.html'%}

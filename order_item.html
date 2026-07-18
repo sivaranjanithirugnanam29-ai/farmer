@@ -1,0 +1,50 @@
+{%include 'header.html'%}
+{% load mathfilters %}
+{{request.session.user_id}}
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="padding-top: 100px;">
+    <div class="card" >
+        <h5 class="card-header">Ordered Item</h5>
+        <div class="card-body">
+            <div class="table-responsive ">
+                <table class="table table-bordered">
+                    <thead style="background: #ff407b;color: #FFF">
+                        <tr class="white">
+                        	<th>Sno</th>
+                            <th>Order Id</th>
+                            <th>Ordered Date</th>
+							<th>Total Amount</th>
+							<th>Status</th>
+							<th>Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      </tr>
+					{% for i in product_details %}
+						<tr>
+							<td>{{forloop.counter}}</td>
+							<td>{{i.1}}</td>
+							<td>{{i.2}}</td>
+							<td><b>{{i.0}}rs</b></td>
+							<td>
+								{% if i.3 == 'order' %}
+									<span style="color: orange;font-size: 15px;font-weight: bold">Waiting for Payment</span>
+								{% elif i.3 == 'paid' %}
+								<span style="color: green;font-size: 15px;font-weight: bold">Amount Paid</span>
+								{% endif %}
+							</td>
+							<td><a href="{% url 'status_order' pk=i.1 user_id=i.4 status=i.3 %}" class="btn btn-info btn-xs"><i class="fa fa-eye"> Details</i></a></td>
+						</tr>
+					{% empty %}
+						<tr>
+					        <td colspan="8" class="text-center bg-primary">No Order</td>
+					    </tr>
+						{% endfor %}
+                    </tbody>
+                </table>
+										
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}
+

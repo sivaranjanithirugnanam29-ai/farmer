@@ -1,0 +1,24 @@
+{%include 'user_header.html'%}
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="padding-top: 50px;">
+    <div class="card" >
+        <h5 class="card-header">Product Details</h5>
+        <div class="card-body">
+        <div class="row">
+		{% for i in product %}
+		<div class="col-md-6" style="text-align: center;">
+			<h4>{{i.p_name}}</h4>
+			<img src="/media/{{i.image}}" width="300px" height="300px">
+			<p>Category Name: {{i.category.name}}</p>
+			<h5>Price: {{i.p_price}}rs</h5>
+			<p style="text-decoration: line-through;"><b>Other Store Price: {{i.cmp_price}}rs</b></p>
+			<a href="{% url 'add_to_cart' pk=i.id %}?price={{i.p_price}}&fid={{i.user_id_id}}" class="btn btn-info btn-lg" style="margin-bottom: 30px;background-color:#ff407b;border-color:#ff407b; "><i class="fa fa-shopping-basket"></i> Basket</a>
+
+		</div>
+		{% endfor %}
+	</div>
+  </div>
+   </div>
+    </div>
+
+{%include 'user_footer.html'%}

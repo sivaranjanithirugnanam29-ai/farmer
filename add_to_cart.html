@@ -1,0 +1,39 @@
+{%include 'user_header.html'%}
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="padding-top: 100px;">
+    <div class="card" >
+        <h5 class="card-header">Add to Basket</h5>
+        <div class="card-body">
+            <div class="table-responsive ">
+                <table class="table table-bordered">
+                    <thead style="background: #ff407b;color: #FFF">
+                        <tr class="white">
+                            <th>s.no</th>
+							<th>Product Name</th>
+							<th>Price</th>
+							<th>Image</th>
+							<th>Quantity</th>
+							<th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in product_detail %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+							<td>{{i.p_name}}</td>
+							<td>{{i.p_price}}</td>
+							<td><img src="/media/{{i.image}}" width="50px"></td>
+							<td style="width:30px;"><form method="post">{% csrf_token %}<input type="number" name="tot" class="form-control" value="1"></td>
+							<td><input type="submit" class="btn btn-success" value="Add to basket"></td></form>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center bg-primary">No Product</td>
+                        </tr>
+                       {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}

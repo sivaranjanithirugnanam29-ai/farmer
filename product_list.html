@@ -1,0 +1,26 @@
+{%include 'temheader.html'%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+
+    <section class="ftco-section">
+      <div class="container" >
+        <div class="row no-gutters justify-content-center ">
+          <div class="col-md-7 text-center heading-section " style="padding-top: 30px;">
+            <h2>All Product Details</h2>
+          </div>
+        </div>
+        <div class="row">
+            {% for i in b %}
+                <div class="col-md-4" style="text-align: center;padding-top: 20px;">
+                   <h4 style="font-size: 20px;">{{i.p_name}}</h4>
+                  <img src="/media/{{i.image}}" width="250px" height="250px">
+                  <p>Category Name: {{i.category.name}}</p>
+                  <h5>Price: {{i.p_price}}rs</h5>
+                  <p style="text-decoration: line-through;"><b>Other Store Price: {{i.cmp_price}}rs</b></p>
+                  <a href="{% url 'add_to_cart' pk=i.id %}?price={{i.p_price}}" class="btn btn-info btn-lg" style="margin-bottom: 30px;background-color:#ff407b;border-color:#ff407b; "><i class="fa fa-shopping-basket"></i> Basket</a>
+                </div>
+            {% endfor %}
+        </div>
+		    </div>
+      </section>
+{%include 'temfooter.html'%}
