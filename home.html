@@ -1,89 +1,41 @@
-<!DOCTYPE HTML>
-{% load static %}
-<!--
-	Hielo by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
-<html>
-	<head>
-		<title>FARMER INFORMATION AND SALE APP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
-	</head>
-	<body>
+---
+layout: default
+---
 
-		<!-- Header -->
-			<header id="header" class="alt">
-				<div class="logo"><a href="/tem/">FARMER INFORMATION <span>AND SALE APP</span></a></div>
-				<a href="#menu">Menu</a>
-			</header>
+<div>
 
-		<!-- Nav -->
-			<nav id="menu">
-				<ul class="links">
-					<li><a href="{% url 'tem' %}">Home</a></li>
-					<li><a href="{% url 'reg' %}">Register</a></li>
-					<li><a href="{% url 'login_details' %}">User Login</a></li>
-					<li><a href="/admin/">Admin Login</a></li>
-					<li><a href="{% url 'search_market' %}">Search Market</a></li>
-					<li><a href="{% url 'search' %}" class="nav-link">Search Forming</a></li>
-					
-				</ul>
-			</nav>
+  {%- if page.title -%}
+  <header>
+    <h1>{{ page.title }}</h1>
+  </header>
+  {%- endif -%}
 
-		<!-- Banner -->
-			<section class="banner full">
-				<article>
-					<img src="{% static 'images/1.jpg' %}" alt="" />
-					<div class="inner">
-						<header>
-							<p>FARMER INFORMATION AND SALE APP</p>
-							<h2>FARMING ZONE</h2>
-						</header>
-					</div>
-				</article>
-				<article>
-					<img src="{% static 'images/2.jpg' %}" alt="" />
-					<div class="inner">
-					</div>
-				</article>
-				<article>
-					<img src="{% static 'images/3.jpg' %}"  alt="" />
-					<div class="inner">
-					</div>
-				</article>
-				<article>
-					<img src="{% static 'images/1.jpg' %}"  alt="" />
-					<div class="inner">
-					</div>
-				</article>
-				<article>
-					<img src="{% static 'images/2.jpg' %}"  alt="" />
-					<div class="inner">
-					</div>
-				</article>
-			</section>
+  <section>
+    {{ content }}
+  </section>
 
+  {%- if site.posts.size > 0 -%}
+    <p class="h4">{{ page.list_title | default: "Posts" }}</p>
+    <ul class="list-unstyled">
+      {%- for post in site.posts -%}
+      <li>
+        <span class="text-muted">
+          {%- assign date_format = "%b %-d, %Y" -%}
+          {{ post.date | date: date_format }}
+        </span>
+        <p class="h5">
+          <a href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}
+          </a>
+        </p>
+        {%- if site.show_excerpts -%}
+          {{ post.excerpt }}
+        {%- endif -%}
+      </li>
+      {%- endfor -%}
+    </ul>
 
-		<!-- Scripts -->
-			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
-			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
-			<script src="{% static 'assets/js/skel.min.js' %}"></script>
-			<script src="{% static 'assets/js/util.js' %}"></script>
-			<script src="{% static 'assets/js/main.js' %}"></script>
-<style type="text/css">
-      #menu, #menu.visible
-      {
-        background: #C70039 !important;
-      }
-      #menu > ul.links > li > a:not(.button)
-      {
-      	color: #FFF !important;
-      	font-family: Comic Sans MS, Comic Sans, cursive	 !important;
-      	font-size: 18px;
-      }
-    </style>
-	</body>
-</html>
+    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+  {%- endif -%}
+
+</div>
