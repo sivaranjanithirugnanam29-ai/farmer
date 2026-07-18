@@ -1,35 +1,39 @@
 //
-// Mixins: Miscellaneous
+// Plugins: Miscellaneous
+// Old plugin codes
 //
 
-// ETC
-@mixin translate($x, $y) {
-  transform: translate($x, $y);
+// _fix for sparkline tooltip
+.jqstooltip {
+  height: auto !important;
+  padding: 5px !important;
+  width: auto !important;
 }
 
-// Different radius each side
-@mixin border-radius-sides($top-left, $top-right, $bottom-left, $bottom-right) {
-  border-radius: $top-left $top-right $bottom-left $bottom-right;
+// jQueryUI
+.connectedSortable {
+  min-height: 100px;
 }
 
-@mixin calc($property, $expression) {
-  #{$property}: calc(#{$expression});
+.ui-helper-hidden-accessible {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
 
-@mixin rotate($value) {
-  transform: rotate($value);
+.sort-highlight {
+  background: $gray-100;
+  border: 1px dashed $gray-300;
+  margin-bottom: 10px;
 }
 
-@mixin animation($animation) {
-  animation: $animation;
+// Charts
+.chart {
+  overflow: hidden;
+  position: relative;
 }
-
-// Gradient background
-@mixin gradient($color: #F5F5F5, $start: #EEE, $stop: #FFF) {
-  background: $color;
-  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, $start), color-stop(1, $stop));
-  background: -ms-linear-gradient(bottom, $start, $stop);
-  background: -moz-linear-gradient(center bottom, $start 0%, $stop 100%);
-  background: -o-linear-gradient($stop, $start);
-}
-
